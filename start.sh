@@ -39,9 +39,8 @@ php artisan package:discover --ansi 2>/dev/null || true
 # Buat SQLite database fresh
 touch database/database.sqlite
 
-# Migrasi & seed
-php artisan migrate --force --no-interaction
-php artisan db:seed --force --no-interaction
+# Migrasi fresh (drop & recreate) + seed — idempotent saat restart
+php artisan migrate:fresh --force --no-interaction --seed
 
 # Cache untuk performa
 php artisan config:cache
