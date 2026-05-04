@@ -17,9 +17,14 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 # Composer 2
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 WORKDIR /var/www/html
 
 COPY . .
+
+# Hapus lock file agar composer resolve ulang sesuai composer.json baru
+RUN rm -f composer.lock
 
 # Install dependencies & build frontend
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --ignore-platform-reqs
