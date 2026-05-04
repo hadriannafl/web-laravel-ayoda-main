@@ -22,7 +22,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # Install dependencies & build frontend
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --ignore-platform-reqs
 RUN npm install && npm run build
 
 # Permissions
