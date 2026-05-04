@@ -9,26 +9,24 @@ mkdir -p storage/logs
 mkdir -p bootstrap/cache
 chmod -R 775 storage bootstrap/cache
 
-# Tulis .env dari environment variables Railway
-cat > .env << EOF
-APP_NAME="${APP_NAME:-CRM-ISS}"
-APP_ENV="${APP_ENV:-production}"
-APP_KEY="${APP_KEY}"
-APP_DEBUG="${APP_DEBUG:-false}"
-APP_URL="${APP_URL:-http://localhost}"
-
-LOG_CHANNEL=stderr
-LOG_LEVEL=error
-
-DB_CONNECTION=sqlite
-
-BROADCAST_DRIVER=log
-CACHE_DRIVER=file
-FILESYSTEM_DISK=local
-QUEUE_CONNECTION=sync
-SESSION_DRIVER=file
-SESSION_LIFETIME=120
-EOF
+# Tulis .env menggunakan printf (hindari masalah CRLF heredoc)
+printf "APP_NAME=\"CRM-ISS\"\n" > .env
+printf "APP_ENV=%s\n" "${APP_ENV:-production}" >> .env
+printf "APP_KEY=%s\n" "${APP_KEY}" >> .env
+printf "APP_DEBUG=%s\n" "${APP_DEBUG:-false}" >> .env
+printf "APP_URL=%s\n" "${APP_URL:-http://localhost}" >> .env
+printf "\n" >> .env
+printf "LOG_CHANNEL=stderr\n" >> .env
+printf "LOG_LEVEL=error\n" >> .env
+printf "\n" >> .env
+printf "DB_CONNECTION=sqlite\n" >> .env
+printf "\n" >> .env
+printf "BROADCAST_DRIVER=log\n" >> .env
+printf "CACHE_DRIVER=file\n" >> .env
+printf "FILESYSTEM_DISK=local\n" >> .env
+printf "QUEUE_CONNECTION=sync\n" >> .env
+printf "SESSION_DRIVER=file\n" >> .env
+printf "SESSION_LIFETIME=120\n" >> .env
 
 # Generate APP_KEY jika belum di-set
 if [ -z "${APP_KEY}" ]; then
@@ -41,7 +39,7 @@ php artisan package:discover --ansi 2>/dev/null || true
 # Buat SQLite database fresh
 touch database/database.sqlite
 
-# Migrasi & seed (selalu fresh karena filesystem Railway ephemeral)
+# Migrasi & seed
 php artisan migrate --force --no-interaction
 php artisan db:seed --force --no-interaction
 
@@ -50,7 +48,6 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-echo "✓ App siap di port ${PORT:-8080}"
+echo "App siap di port ${PORT:-8080}"
 
-# Jalankan server
 exec php artisan serve --host=0.0.0.0 --port="${PORT:-8080}"
