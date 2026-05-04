@@ -27,6 +27,9 @@ if [ -z "${APP_KEY}" ]; then
     php artisan key:generate --force
 fi
 
+# Jalankan post-install scripts yang di-skip saat build
+php artisan package:discover --ansi 2>/dev/null || true
+
 # Buat SQLite database fresh
 touch database/database.sqlite
 
