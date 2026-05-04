@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+# Buat direktori storage yang diperlukan Laravel
+mkdir -p storage/framework/views
+mkdir -p storage/framework/cache/data
+mkdir -p storage/framework/sessions
+mkdir -p storage/logs
+mkdir -p bootstrap/cache
+chmod -R 775 storage bootstrap/cache
+
 # Tulis .env dari environment variables Railway
 cat > .env << EOF
 APP_NAME="${APP_NAME:-CRM-ISS}"
