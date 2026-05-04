@@ -2,8 +2,11 @@ FROM php:8.2-cli
 
 # System dependencies + PHP extensions
 RUN apt-get update && apt-get install -y \
-    libsqlite3-dev libzip-dev libonig-dev libxml2-dev unzip curl git \
-    && docker-php-ext-install pdo pdo_sqlite mbstring xml zip bcmath fileinfo \
+    libsqlite3-dev libzip-dev libonig-dev libxml2-dev \
+    libpng-dev libjpeg-dev libfreetype6-dev \
+    unzip curl git \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_sqlite mbstring xml zip bcmath fileinfo gd \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Node.js 20
