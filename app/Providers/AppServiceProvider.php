@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
 }
