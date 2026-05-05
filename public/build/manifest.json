@@ -1,0 +1,34 @@
+{
+  "public/images/company-icon-01.svg": {
+    "file": "assets/company-icon-01.32e04494.svg",
+    "src": "public/images/company-icon-01.svg"
+  },
+  "public/images/company-icon-02.svg": {
+    "file": "assets/company-icon-02.e629c891.svg",
+    "src": "public/images/company-icon-02.svg"
+  },
+  "public/images/company-icon-03.svg": {
+    "file": "assets/company-icon-03.4964b83a.svg",
+    "src": "public/images/company-icon-03.svg"
+  },
+  "public/images/company-icon-04.svg": {
+    "file": "assets/company-icon-04.d05a5457.svg",
+    "src": "public/images/company-icon-04.svg"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app.e65819a6.js",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "assets": [
+      "assets/company-icon-01.32e04494.svg",
+      "assets/company-icon-02.e629c891.svg",
+      "assets/company-icon-03.4964b83a.svg",
+      "assets/company-icon-04.d05a5457.svg"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app.d8f75c9e.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  }
+}

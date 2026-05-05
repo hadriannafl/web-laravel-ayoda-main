@@ -9,11 +9,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_sqlite mbstring xml zip bcmath fileinfo gd \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Node.js 20
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
 # Composer 2
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -29,7 +24,6 @@ RUN rm -f composer.lock
 
 # Install dependencies & build frontend
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --ignore-platform-reqs --no-scripts
-RUN npm install && npm run build
 
 # Permissions
 RUN chmod -R 775 storage bootstrap/cache && chmod +x start.sh

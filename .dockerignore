@@ -3,7 +3,6 @@ vendor/
 .env
 .env.backup
 public/hot
-public/build/
 storage/framework/cache/data/
 storage/framework/sessions/
 storage/framework/views/
