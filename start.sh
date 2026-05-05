@@ -44,7 +44,6 @@ php artisan migrate:fresh --force --no-interaction --seed
 
 # Cache untuk performa
 php artisan config:cache
-php artisan route:cache
 php artisan view:cache
 
 echo "App siap di port ${PORT:-8080}"
